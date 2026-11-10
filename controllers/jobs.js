@@ -1,4 +1,4 @@
-import { JobModel } from "../models/jobs.js";
+import { JobModel } from "../models/job.js";
 import { DEFAULTS } from "../config.js";
 export class JobsController {
   static async getAll(req, res) {

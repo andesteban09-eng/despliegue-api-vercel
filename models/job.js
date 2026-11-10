@@ -59,12 +59,12 @@ export class JobModel {
 
   static async update(id, { titulo, empresa, ubicacion, descripcion, data }) {
     const job = jobs.find((job) => job.id === id);
+    if (!job) return null;
     job.titulo = titulo;
     job.empresa = empresa;
     job.ubicacion = ubicacion;
     job.descripcion = descripcion;
     job.data = data;
-    if (!job) return null;
     return job;
   }
   static async partialUpdate(
@@ -72,6 +72,7 @@ export class JobModel {
     { titulo, empresa, ubicacion, descripcion, data },
   ) {
     const job = jobs.find((job) => job.id === id);
+    if (!job) return null;
     if (titulo !== undefined) {
       job.titulo = titulo;
     }
@@ -87,7 +88,6 @@ export class JobModel {
     if (data !== undefined) {
       job.data = data;
     }
-    if (!job) return null;
     return job;
   }
 
