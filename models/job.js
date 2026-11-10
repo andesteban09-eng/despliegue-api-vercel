@@ -32,7 +32,12 @@ export class JobModel {
       offsetNumber,
       offsetNumber + limitNumber,
     );
-    return paginatedJobs;
+    return {
+      data: paginatedJobs,
+      total: filteredJobs.length,
+      limit: limitNumber,
+      offset: offsetNumber,
+    };
   }
 
   static async getById(id) {
@@ -59,34 +64,39 @@ export class JobModel {
     job.ubicacion = ubicacion;
     job.descripcion = descripcion;
     job.data = data;
+    if (!job) return null;
     return job;
   }
-  static async partialUpdate(id, { titulo, empresa, ubicacion, descripcion, data }) {
+  static async partialUpdate(
+    id,
+    { titulo, empresa, ubicacion, descripcion, data },
+  ) {
     const job = jobs.find((job) => job.id === id);
     if (titulo !== undefined) {
       job.titulo = titulo;
     }
     if (empresa !== undefined) {
-        job.empresa = empresa;
+      job.empresa = empresa;
     }
     if (ubicacion !== undefined) {
-        job.ubicacion = ubicacion;
+      job.ubicacion = ubicacion;
     }
     if (descripcion !== undefined) {
-        job.descripcion = descripcion;
+      job.descripcion = descripcion;
     }
     if (data !== undefined) {
-        job.data = data;
+      job.data = data;
     }
+    if (!job) return null;
     return job;
-    }
+  }
 
-    static async delete(id) {
-      const jobIndex = jobs.findIndex((job) => job.id === id);
-      if (jobIndex === -1) {
-        return false;
-      }
-      jobs.splice(jobIndex, 1);
-      return true;
+  static async delete(id) {
+    const jobIndex = jobs.findIndex((job) => job.id === id);
+    if (jobIndex === -1) {
+      return false;
     }
+    jobs.splice(jobIndex, 1);
+    return true;
+  }
 }
