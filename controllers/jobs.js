@@ -1,3 +1,4 @@
+import { JobModel } from "../models/job.js";
 export class JobsController {
   static async getAll(req, res) {
     const {

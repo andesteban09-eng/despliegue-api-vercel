@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { JobsController } from "../controllers/jobs.js";
+
 export const jobsRouter = Router();
 //CRUD: Create, Read, Update, Delete
 jobsRouter.get("/", JobsController.getAll);

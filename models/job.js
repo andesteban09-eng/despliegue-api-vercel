@@ -1,4 +1,6 @@
 import jobs from "../jobs.json" with { type: "json" };
+import { DEFAULTS } from "../config.js";
+import { randomUUID } from "node:crypto";
 
 export class JobModel {
   static async getAll({
@@ -39,7 +41,7 @@ export class JobModel {
   }
   static async create({ titulo, empresa, ubicacion, descripcion, data }) {
     const newJob = {
-      id: crypto.randomUUID(),
+      id: randomUUID(),
       titulo,
       empresa,
       ubicacion,
