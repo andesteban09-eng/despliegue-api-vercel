@@ -1,29 +1,33 @@
 import { JobModel } from "../models/job.js";
 export class JobsController {
   static async getAll(req, res) {
-    const {
-      text,
-      title,
-      level,
-      limit = DEFAULTS.LIMIT_PAGINATION,
-      technology,
-      offset = DEFAULTS.LIMIT_OFFSET,
-    } = req.query;
-    const paginatedJobs = await JobModel.getAll({
-      text,
-      title,
-      level,
-      limit,
-      technology,
-      offset,
-    });
+    try {
+      const {
+        text,
+        title,
+        level,
+        limit = DEFAULTS.LIMIT_PAGINATION,
+        technology,
+        offset = DEFAULTS.LIMIT_OFFSET,
+      } = req.query;
 
-    return res.json({
-      data: paginatedJobs,
-      total: filteredJobs.length,
-      limit: limitNumber,
-      offset: offsetNumber,
-    });
+      const result = await JobModel.getAll({
+        text,
+        title,
+        level,
+        limit,
+        technology,
+        offset,
+      });
+
+      return res.json(result);
+    } catch (error) {
+      console.error("Error en JobsController.getAll:", error);
+
+      return res.status(500).json({
+        message: "Error al obtener los empleos",
+      });
+    }
   }
 
   static async getById(req, res) {
