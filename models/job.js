@@ -22,8 +22,8 @@ export class JobModel {
       );
     }
     if (technology) {
-      filteredJobs = filteredJobs.filter((job) =>
-        job.data.tecnologias.includes(technology),
+      filteredJobs = filteredJobs.filter(
+        (job) => job.data.technology === technology,
       );
     }
     const limitNumber = Number(limit);

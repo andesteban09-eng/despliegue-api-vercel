@@ -20,7 +20,7 @@ app.get("/health", (req, res) => {
   });
 });
 
-if (process.env.NODE_ENV !== "production") {
+if (!process.env.NODE_ENV) {
   app.listen(port, () => {
     console.log(`Server app listening on http://localhost:${port}`);
   });
